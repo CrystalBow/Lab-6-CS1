@@ -1,8 +1,21 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int search(int numbers[], int low, int high, int value) 
 {
-	return -1;
+    int index, splitPoint = (high + low)/2;
+    if (low >= high) {
+        return -1;
+    }
+    if (numbers[splitPoint] == value) {
+        return splitPoint;
+    }
+    if (value < numbers[splitPoint]) {
+        index = search(numbers, low, splitPoint - 1, value);
+    } else {
+        index = search(numbers, splitPoint + 1, high, value);
+    }
+    return index;
 }
 
 void printArray(int numbers[], int sz)
